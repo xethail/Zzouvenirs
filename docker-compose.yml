@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  db:
+    image: postgres
+    container_name: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: zzouvenir
+      POSTGRES_PASSWORD: zzouvenir
+    volumes:
+      - data:/var/lib/postgresql/data
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    ports:
+      - "8888:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: zzouvenir@zz.com
+      PGADMIN_DEFAULT_PASSWORD: zzouvenir
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
+volumes:
+  data:
+  pgadmin-data:
