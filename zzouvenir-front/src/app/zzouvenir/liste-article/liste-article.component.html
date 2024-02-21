@@ -1,0 +1,14 @@
+<div class="container">
+
+    <div class="row">
+        <div *ngFor="let article of liste" class="card horizontal hoverable" appTestDirective="red" (click)="goToPlayer(x)">
+            <div class="card-content">
+                <div class="col m12 s6">
+                    <p>Mon prénom est</p>
+                    <p class="{{article.price | chip}}"> {{article.price}} </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
