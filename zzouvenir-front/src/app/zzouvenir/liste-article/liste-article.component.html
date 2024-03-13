@@ -1,10 +1,10 @@
 <div class="container">
 
     <div class="row">
-        <div *ngFor="let article of liste" class="card horizontal hoverable" appTestDirective="red" (click)="goToPlayer(x)">
+        <div *ngFor="let article of liste" class="card horizontal hoverable" appArticleBorder="purple" (click)="goToArticle(article)">
             <div class="card-content">
                 <div class="col m12 s6">
-                    <p>Mon prénom est</p>
+                    <p>{{article.title}}</p>
                     <p class="{{article.price | chip}}"> {{article.price}} </p>
                 </div>
             </div>

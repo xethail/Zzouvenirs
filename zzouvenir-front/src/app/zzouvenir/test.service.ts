@@ -13,12 +13,12 @@ export class TestService {
   }
 
   private initializeTab() {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 15; i++) {
       this.tab[i] = {
         id: i,
         title: "Article " + i,
         comment: "Description",
-        price: i * 5,
+        price: i * 8,
       };
     }
   }
