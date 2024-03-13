@@ -1,4 +1,4 @@
-package org.example.zzouvenir;
+package org.zzouvenir;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

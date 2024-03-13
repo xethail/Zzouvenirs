@@ -1,4 +1,4 @@
-package org.example.zzouvenir;
+package org.zzouvenir;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
