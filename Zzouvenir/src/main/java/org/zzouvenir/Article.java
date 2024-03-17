@@ -15,10 +15,6 @@ public class Article {
     private int ordre;
 
 
-    @Lob
-    @Column(name = "image", columnDefinition="BYTEA")
-    private byte[] image;
-
     // Getters and Setters
     // Constructeurs
 
@@ -74,14 +70,5 @@ public class Article {
         this.ordre = ordre;
     }
 
-    // Getter and setter for image
-
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
 
 }

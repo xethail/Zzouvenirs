@@ -63,33 +63,4 @@ public class ArticleController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/{id}/image")
-    public ResponseEntity<Void> uploadImage(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
-        try {
-            Article article = articleRepository.findById(id)
-                    .orElseThrow(() -> new ArticleNotFoundException(id));
-
-            article.setImage(file.getBytes());
-            articleRepository.save(article);
-
-            return ResponseEntity.ok().build();
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
-    @GetMapping("/{id}/image")
-    public ResponseEntity<ByteArrayResource> downloadImage(@PathVariable Long id) {
-        Article article = articleRepository.findById(id)
-                .orElseThrow(() -> new ArticleNotFoundException(id));
-
-        if (article.getImage() != null) {
-            return ResponseEntity.ok()
-                    .contentLength(article.getImage().length)
-                    .contentType(MediaType.IMAGE_JPEG)
-                    .body(new ByteArrayResource(article.getImage()));
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
 }
