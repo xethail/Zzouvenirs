@@ -5,6 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+
 @RestController
 @RequestMapping("/articles")
 public class ArticleController {
@@ -16,6 +19,12 @@ public class ArticleController {
     public ResponseEntity<Article> addArticle(@RequestBody Article article) {
         Article savedArticle = articleRepository.save(article);
         return new ResponseEntity<>(savedArticle, HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Article>> getAllArticles() {
+        List<Article> articles = articleRepository.findAll();
+        return new ResponseEntity<>(articles, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -42,6 +51,12 @@ public class ArticleController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteArticle(@PathVariable Long id) {
         articleRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> deleteAllArticles() {
+        articleRepository.deleteAll();
         return ResponseEntity.noContent().build();
     }
 }
