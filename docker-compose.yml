@@ -1,7 +1,9 @@
 version: "3.8"
 services:
   db:
-    image: postgres
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: postgres
     restart: always
     ports:
@@ -26,3 +28,4 @@ services:
 volumes:
   data:
   pgadmin-data:
+

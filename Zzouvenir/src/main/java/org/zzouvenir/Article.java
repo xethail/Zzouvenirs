@@ -1,9 +1,6 @@
 package org.zzouvenir;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Article {
@@ -16,6 +13,11 @@ public class Article {
     private double prix;
     private String comment;
     private int ordre;
+
+
+    @Lob
+    @Column(name = "image", columnDefinition="BYTEA")
+    private byte[] image;
 
     // Getters and Setters
     // Constructeurs
@@ -71,4 +73,15 @@ public class Article {
     public void setOrdre(int ordre) {
         this.ordre = ordre;
     }
+
+    // Getter and setter for image
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
 }
