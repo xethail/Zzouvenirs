@@ -9,4 +9,3 @@ public class ArticleNotFoundException extends RuntimeException {
         super("Article not found with id: " + id);
     }
 }
-

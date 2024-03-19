@@ -1,7 +1,10 @@
 package org.zzouvenir;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
 @Entity
 public class Article {
 
@@ -9,66 +12,35 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Setter
     private String titre;
+    @Setter
     private double prix;
+    @Setter
     private String comment;
+    @Setter
     private int ordre;
 
-
-    // Getters and Setters
-    // Constructeurs
+    @Setter
+    @Lob
+    @Column(columnDefinition = "bytea") // Spécifier le type de colonne comme bytea pour PostgreSQL
+    private byte[] image; // Champ pour stocker l'image en tant que BLOB
 
     public Article() {
     }
 
-    public Article(String titre, double prix, String comment, int ordre) {
+    public Article(String titre, double prix, String comment, int ordre, byte[] image) {
         this.titre = titre;
         this.prix = prix;
         this.comment = comment;
         this.ordre = ordre;
+        this.image = image;
     }
 
-    // Getters and Setters
 
-    public Long getId() {
-        return id;
-    }
+    @Setter
+    private String imageType; // Field to store the type of the image (e.g., "jpg", "png", etc.)
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitre() {
-        return titre;
-    }
-
-    public void setTitre(String titre) {
-        this.titre = titre;
-    }
-
-    public double getPrix() {
-        return prix;
-    }
-
-    public void setPrix(double prix) {
-        this.prix = prix;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public int getOrdre() {
-        return ordre;
-    }
-
-    public void setOrdre(int ordre) {
-        this.ordre = ordre;
-    }
-
+    // Constructors, Getters, Setters...
 
 }

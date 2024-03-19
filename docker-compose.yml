@@ -30,20 +30,20 @@ services:
     #networks:
     #  - mynet
 
-  backend:
-    image: backend:1.0
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-    environment:
-      - CONFIG_LOCATION=/backend/application.properties
-      - DB_PASSWORD=zzouvenir
-      - DB_URL=jdbc:postgresql://db:5432/zzouvenir
-      - BACK_URL=backend:8082
-    depends_on:
-      - db
-    restart: on-failure:5
-    #networks:
-    #  - mynet
+#  backend:
+#    image: backend:1.0
+#    volumes:
+#      - /etc/localtime:/etc/localtime:ro
+#    environment:
+#      - CONFIG_LOCATION=/backend/application.properties
+#      - DB_PASSWORD=zzouvenir
+#      - DB_URL=jdbc:postgresql://db:5432/zzouvenir
+#      - BACK_URL=backend:8082
+#    depends_on:
+#      - db
+#    restart: on-failure:5
+#    #networks:
+#    #  - mynet
 
 volumes:
   data:
