@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Article } from '../article';
 import { TestService } from '../test.service';
 
 @Component({
@@ -21,17 +20,19 @@ export class ListeArticleComponent {
 
   constructor(private router: Router, private data: TestService) { }
 
+  sortArticlesByOrder() {
+    this.liste.sort((a: any, b: any) => a.ordre - b.ordre);
+  }  
+
   ngOnInit() 
   {
-    this.liste = this.data.tab;
-
     if(typeof window !== 'undefined')
     {
       this.intervalId = window.setInterval( () => {
         this.data.getArticles().subscribe(
           (response: any) => {
             this.liste = response;
-            console.log("Liste : ", this.liste);
+            this.sortArticlesByOrder();
           }
         );
       }, 3000); // Refresh toutes les 3 secondes
@@ -44,7 +45,7 @@ export class ListeArticleComponent {
   }
 
 
-  goToArticle(article : Article)
+  goToArticle(article : any)
   {
     this.router.navigate(['liste', article.id]);
   }

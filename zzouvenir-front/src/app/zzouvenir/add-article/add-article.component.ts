@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TestService } from '../test.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-article',
@@ -38,7 +38,7 @@ export class AddArticleComponent {
 
   selectedFile: File | null = null;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private data : TestService) {}
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0] as File;
@@ -59,8 +59,11 @@ export class AddArticleComponent {
       ordre: this.ordre
     }));
 
-    const id = 'replace_with_id'; // Remplacez ceci par l'ID réel de l'article
-    this.http.post(`http://localhost:8080/api/articles`, formData)
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.data.token // Utilisation du token JWT dans l'en-tête d'authentification
+    });
+    
+    this.http.post(`http://localhost:8080/api/articles`, formData, { headers: headers })
       .subscribe(
         response => {
           console.log('Upload successful', response);
