@@ -3,6 +3,10 @@ package org.zzouvenir;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.Type;
+
+import java.sql.Types;
 
 @Getter
 @Entity
@@ -23,6 +27,7 @@ public class Article {
 
     @Setter
     @Lob
+    @JdbcTypeCode(Types.BINARY)
     @Column(columnDefinition = "bytea") // Spécifier le type de colonne comme bytea pour PostgreSQL
     private byte[] image; // Champ pour stocker l'image en tant que BLOB
 

@@ -33,13 +33,15 @@ public class ArticleController {
         logger.info("Image Data Length: {}", imageData.length); // Log image data length
 
         Article article = new ObjectMapper().readValue(articleJson, Article.class);
-        article.setImage(imageData);
+        article.setImage(imageFile.getBytes());
         article.setImageType(imageType);
         logger.info("Article JSON: {}", articleJson); // Log article JSON
 
         logger.info("Image Type: {}", article.getImage()); // Log image type
 
         logger.info("Image Type is : {}", article.getImage().getClass());
+
+
 
         Article savedArticle = articleRepository.save(article);
         logger.info("Saved Article ID: {}", savedArticle.getId()); // Log saved article ID
