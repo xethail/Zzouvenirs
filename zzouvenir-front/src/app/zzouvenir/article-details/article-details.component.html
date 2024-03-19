@@ -1,0 +1,39 @@
+<div *ngIf="article" class="row">
+    <div class="col s12 m8 offset-m2">
+        <h2 class="header center">{{ article.title }}</h2>
+        <div class="card horizontal hoverable">
+            <div class="card-image">
+                <img src="{{this.imgSrc}}">
+            </div>
+            <div class="card-stacked">
+                <div class="card-content">
+                    <table class="bordered striped">
+                        <tbody>
+                            <tr>
+                            <td>Identidiant</td>
+                            <td><strong>{{ article.id }}</strong></td>
+                            </tr>
+                            <tr>
+                            <td>Titre</td>
+                            <td><strong>{{ article.titre }}</strong></td>
+                            </tr>
+                            <tr>
+                            <td>Prix</td>
+                            <td class="{{article.prix | chip}}"><strong>{{ article.prix }}</strong></td>
+                            </tr>
+                            <tr>
+                            <td>Description</td>
+                            <td><strong>{{ article.comment }}</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-action">
+                    <a (click)="goBack()">Retour</a>
+                    <a class="right" (click)="deleteArticle()">Supprimer l'article</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<h4 *ngIf='!article' class="center">Aucun article n'a cet identifiant !</h4>

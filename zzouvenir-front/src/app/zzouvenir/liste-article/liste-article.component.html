@@ -1,0 +1,23 @@
+<div class="container">
+
+    <div class="row">
+        <div *ngFor="let article of liste" class="card horizontal hoverable" appArticleBorder="purple" (click)="goToArticle(article)">
+            <!-- <div class="card-image">
+                <img src="{{article.imgSrc}}">
+            </div> -->
+            <div class="card-content">
+                <div class="col m12 s6">
+                    <h4>{{article.titre}}</h4>
+                    <p class="{{article.prix | chip}}"> {{article.prix}} </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="center">
+        <button (click)="goToAddArticle()" class="waves-effect waves-light btn">Ajouter un article</button>
+        <p></p><p></p>
+    </div>
+        
+
+</div>

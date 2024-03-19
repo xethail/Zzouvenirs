@@ -16,7 +16,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @RestController
-@RequestMapping("/articles")
+@RequestMapping("/api/articles")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ArticleController {
 
     private static final Logger logger = LoggerFactory.getLogger(ArticleController.class);
