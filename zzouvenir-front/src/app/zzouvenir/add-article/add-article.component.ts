@@ -16,26 +16,6 @@ export class AddArticleComponent {
   ordre: number = 0;
   srcImage : string = "cat-2.jpg";
 
-  // constructor(private router: Router, private data: TestService) { }
-
-  // postArticle() : void {
-  //   const imageFile: File = new File([this.srcImage], this.srcImage, { type: "image/jpeg" }); // Chargez le fichier image depuis le répertoire approprié
-  //   const article = {
-  //     titre: this.titre,
-  //     prix: this.prix,
-  //     comment: this.comment,
-  //     ordre: this.ordre
-  //   };
-
-  //   this.data.postArticle(imageFile, article).subscribe(
-  //     (response: any) => {
-  //       //this.response = response;
-  //       //console.log("réponse post : ", response);
-  //       this.router.navigate(['liste']);
-  //     }
-  //   );
-  // }
-
   selectedFile: File | null = null;
 
   constructor(private http: HttpClient, private router: Router, private data : TestService) {}

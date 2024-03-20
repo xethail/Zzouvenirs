@@ -35,7 +35,7 @@ export class ListeArticleComponent {
             this.sortArticlesByOrder();
           }
         );
-      }, 3000); // Refresh toutes les 3 secondes
+      }, 1000); // Refresh toutes les 3 secondes
     } 
 
   }
@@ -53,6 +53,11 @@ export class ListeArticleComponent {
   goToAddArticle()
   {
     this.router.navigate(['addarticle']);
+  }
+
+  goToChangeArticle(article : any)
+  {
+    this.router.navigate(['modifyarticle', article.id]);
   }
 
 }

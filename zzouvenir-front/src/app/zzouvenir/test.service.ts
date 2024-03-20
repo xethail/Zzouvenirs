@@ -118,7 +118,7 @@ export class TestService {
   
     const body = {};
   
-    return this.http.post<any>('http://localhost:8080/login', body, { headers: headers, responseType: 'text' as 'json' }).pipe(
+    return this.http.post<any>('http://localhost:8080/api/login', body, { headers: headers, responseType: 'text' as 'json' }).pipe(
       tap((response: string) => {
         // Extraire le token de la réponse
         this.token = response;

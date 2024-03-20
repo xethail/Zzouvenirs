@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping("/api/articles")
-@CrossOrigin(origins = "http://frontend")
+@CrossOrigin(origins = "*")
 public class ArticleController {
 
     private static final Logger logger = LoggerFactory.getLogger(ArticleController.class);

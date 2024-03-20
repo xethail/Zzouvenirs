@@ -72,6 +72,10 @@ export class ArticleDetailsComponent {
     this.router.navigate(['liste']);
   }
 
+  goToModifyArticle() : void {
+    this.router.navigate(['modifyarticle', this.id]);
+  }
+
   deleteArticle() : void {
     this.data.deleteArticle(this.id).subscribe(
       (response: any) => {

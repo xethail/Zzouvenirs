@@ -1,0 +1,114 @@
+version: "3.8"
+services:
+
+  #nginx:
+  #  image: bunkerity/bunkerweb:1.4.7
+  #  restart: on-failure:5
+  #  ports:
+  #    - 80:8080
+  #    - 443:8443
+  #  volumes:
+  #    - letsencrypt:/etc/letsencrypt
+  #    - /etc/localtime:/etc/localtime:ro
+  #  environment:
+  #    - SERVER_NAME=ballejos-lilian.fr
+  #    - SERVE_FILES=no
+  #    - DISABLE_DEFAULT_SERVER=yes
+  #    - REDIRECT_HTTP_TO_HTTPS=yes
+  #    - AUTO_LETS_ENCRYPT=yes
+  #    - USE_PROXY_CACHE=yes
+  #    - USE_MODSECURITY=yes
+  #    - USE_REVERSE_PROXY=yes
+  #    - USE_CLAMAV_UPLOAD=no
+  #    - USE_LIMIT_REQ=yes
+  #    - LIMIT_REQ_RATE=10r/s
+  #    - USE_LIMIT_CONN=yes
+  #    - LIMIT_CONN_MAX_HTTP2=200
+  #    - BLOCK_USER_AGENT=yes
+  #    - WHITELIST_USER_AGENT=Java curl/* PostmanRuntime/*
+  #    - USE_BAD_BEHAVIOR=yes
+  #    - BAD_BEHAVIOR_THRESHOLD=20
+  #    - BAD_BEHAVIOR_BAN_TIME=3600
+  #    - MAX_CLIENT_SIZE=25m
+  #    - USE_GZIP=yes
+  #    - WHITELIST_RDNS=.googlebot.com .google.com scanners.acunetix.com online.acunetix.com
+  #    - ALLOWED_METHODS=GET|POST|HEAD|PUT|DELETE|OPTIONS
+  #    - USE_REAL_IP=yes
+  #    - USE_BUNKERNET=no
+  #    - CONTENT_SECURITY_POLICY=upgrade-insecure-requests; object-src 'none'; frame-src 'self' *.google.com; child-src 'self'; form-action 'self'; frame-ancestors 'self'; connect-src 'self' *.googleapis.com *.google-analytics.com;
+  #    - REVERSE_PROXY_HOST_1=http://frontend
+  #    - REVERSE_PROXY_URL_1=/
+  #    - REVERSE_PROXY_HOST_2=http://backend:8082
+  #    - REVERSE_PROXY_URL_2=/
+  #    - REVERSE_PROXY_INTERCEPT_ERRORS=no
+  #  networks:
+  #    - mynet
+
+
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: zzouvenir
+      POSTGRES_PASSWORD: zzouvenir
+    volumes:
+      - data:/var/lib/postgresql/data
+    networks:
+      - mynet
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    ports:
+      - "8888:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: zzouvenir@zz.com
+      PGADMIN_DEFAULT_PASSWORD: zzouvenir
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    networks:
+      - mynet
+
+  backend:
+    image: backend:1.0
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - CONFIG_LOCATION=/backend/application.properties
+      - DB_PASSWORD=zzouvenir
+      - DB_URL=jdbc:postgresql://db:5432/zzouvenir
+      - BACK_URL=backend:8082
+    depends_on:
+      - db
+    restart: on-failure:5
+    networks:
+      - mynet
+    
+  frontend:
+    image: frontend:1.0
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+    restart: on-failure:5
+    networks:
+      - mynet
+
+
+volumes:
+  data:
+  pgadmin-data:
+
+networks:
+  mynet:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.22.0.0/16
+
